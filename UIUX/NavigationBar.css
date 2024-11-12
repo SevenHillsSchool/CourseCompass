@@ -2,7 +2,10 @@
   text-align: left;
 }
 .Nav-logo {
-  height: 10vmin;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  height: 8vmin;
   pointer-events: none;
 }
 
