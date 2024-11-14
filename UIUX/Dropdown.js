@@ -19,74 +19,62 @@ function App() {
 
       {/* Dropdown 1 */}
       <div>
-        <label>
-          Select School:
           <select
             value={selectedOption1}
             onChange={(e) => setSelectedOption1(e.target.value)}
           >
-            <option value="">Select an option</option>
+            <option value="">Select School</option>
             {dropdownOptions1.map((option, index) => (
               <option key={index} value={option}>
                 {option}
               </option>
             ))}
           </select>
-        </label>
       </div>
 
       {/* Dropdown 2 */}
       <div>
-        <label>
-          Select Department/Grade:
           <select
             value={selectedOption2}
             onChange={(e) => setSelectedOption2(e.target.value)}
           >
-            <option value="">Select a choice</option>
+            <option value="">Select Department/Grade</option>
             {dropdownOptions2.map((choice, index) => (
               <option key={index} value={choice}>
                 {choice}
               </option>
             ))}
           </select>
-        </label>
       </div>
 
       {/* Dropdown 3 */}
       <div>
-        <label>
-          Select Course:
           <select
             value={selectedOption3}
             onChange={(e) => setSelectedOption3(e.target.value)}
           >
-            <option value="">Select an item</option>
+            <option value="">Select Course</option>
             {dropdownOptions3.map((item, index) => (
               <option key={index} value={item}>
                 {item}
               </option>
             ))}
           </select>
-        </label>
       </div>
 
       {/* Dropdown 4 */}
       <div>
-        <label>
-          Select Teacher:
           <select
             value={selectedOption4}
             onChange={(e) => setSelectedOption4(e.target.value)}
           >
-            <option value="">Select an option</option>
+            <option value="">Select Teacher</option>
             {dropdownOptions4.map((option, index) => (
               <option key={index} value={option}>
                 {option}
               </option>
             ))}
           </select>
-        </label>
       </div>
 
       {/* Display selected options */}
@@ -102,4 +90,3 @@ function App() {
 }
 
 export default App;
-
