@@ -5,11 +5,13 @@ function App() {
   const [selectedOption1, setSelectedOption1] = useState('');
   const [selectedOption2, setSelectedOption2] = useState('');
   const [selectedOption3, setSelectedOption3] = useState('');
+  const [selectedOption4, setSelectedOption4] = useState('');
 
   // Sample options for each dropdown
   const dropdownOptions1 = ['Elementary', 'Middle', 'Upper'];
   const dropdownOptions2 = ['English', 'Math', 'History', 'More Subjects'];
-  const dropdownOptions3 = ['Unit 1', 'Unit 2', 'Unit 3'];
+  const dropdownOptions3 = ['Course1', 'Coure2', 'Course3'];
+  const dropdownOptions4 = ['Teacher1', 'Teacher2', 'Teacher3'];
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
@@ -18,7 +20,7 @@ function App() {
       {/* Dropdown 1 */}
       <div>
         <label>
-          Dropdown 1:
+          Select School:
           <select
             value={selectedOption1}
             onChange={(e) => setSelectedOption1(e.target.value)}
@@ -36,7 +38,7 @@ function App() {
       {/* Dropdown 2 */}
       <div>
         <label>
-          Dropdown 2:
+          Select Department/Grade:
           <select
             value={selectedOption2}
             onChange={(e) => setSelectedOption2(e.target.value)}
@@ -54,7 +56,7 @@ function App() {
       {/* Dropdown 3 */}
       <div>
         <label>
-          Dropdown 3:
+          Select Course:
           <select
             value={selectedOption3}
             onChange={(e) => setSelectedOption3(e.target.value)}
@@ -69,15 +71,35 @@ function App() {
         </label>
       </div>
 
+      {/* Dropdown 4 */}
+      <div>
+        <label>
+          Select Teacher:
+          <select
+            value={selectedOption4}
+            onChange={(e) => setSelectedOption4(e.target.value)}
+          >
+            <option value="">Select an option</option>
+            {dropdownOptions4.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       {/* Display selected options */}
       <div style={{ marginTop: '20px' }}>
         <h2>Selected Options:</h2>
         <p>Dropdown 1: {selectedOption1 || 'None'}</p>
         <p>Dropdown 2: {selectedOption2 || 'None'}</p>
         <p>Dropdown 3: {selectedOption3 || 'None'}</p>
+        <p>Dropdown 4: {selectedOption4 || 'None'}</p>
       </div>
     </div>
   );
 }
 
 export default App;
+
