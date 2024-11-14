@@ -1,5 +1,8 @@
 import logo from './logo.png';
-import './NavigationBar.css';
+import './styling/NavigationBar.css';
+// import App from './pages/App.js';
+
+// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function NavigationBar() {
     return (
@@ -9,16 +12,18 @@ function NavigationBar() {
                 <img src={logo} className="Nav-logo" alt="logo" />
                 <a
                     className="Home-link"
-                    href="https://reactjs.org"
-                    target="_blank"
+                    href="/"
                     rel="noopener noreferrer"
-                >
-                Home
-                </a>
+                >Home</a>
+                <a
+                    className="Other-link"
+                    href="/Blooper"
+                    rel="noopener noreferrer"
+                >Other page</a>
+                <input type="text" className="Search-bar" placeholder="Search..."/>
             </header>
         </div>
     );
   }
   
   export default NavigationBar;
-  
