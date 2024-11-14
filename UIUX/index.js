@@ -1,13 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
+import './styling/index.css';
+
 import NavigationBar from './NavigationBar';
+import App from './pages/App';
+import Blooper from './pages/Blooper';
+
 import reportWebVitals from './reportWebVitals';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "",
+    element: <App />,
+  },
+  {
+    path: "/Blooper",
+    element: <Blooper />,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <NavigationBar />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
