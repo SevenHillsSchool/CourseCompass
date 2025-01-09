@@ -9,6 +9,9 @@ function Browse() {
   const [searchParameters, setSearchParameters] = useState({
     input: ""
   });
+  const [nextPage, setNextPage] = useState({
+    input: ""
+  });
   const [dropdowns, setDropdowns] = useState({
     divisions: [],
     subjects: [],
@@ -140,19 +143,37 @@ function Browse() {
     for (var i = 0; i < nameList.length; i++) {
       if (nameList[i] === value) {
         idValue = idList[i];
+        setNextPage({
+          input: idValue
+        });
       }
     }
-    text += `
-    <li>
-      <form method="post" action="/course-info">
-        <input type="hidden" name="extra_submit_param" value="${idValue}">
-        <button type="submit" name="submit_param" value="${idValue}" class="link-button">
-          ${value}
-        </button>
-      </form>
-    </li>`;
+
+    // useEffect(() => {
+      if (!nextPage.input) {
+        return;
+      }  // Don't fetch if input is empty
+
+      fetch('/getCourseInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'data=' + encodeURIComponent(JSON.stringify(nextPage.input))
+      })
+    // }, [nextPage.input]);
+
+    // text += `
+    // <li>
+    //   <form method="post" action="/course-info">
+    //     <input type="hidden" name="extra_submit_param" value="${idValue}">
+    //     <button type="submit" name="submit_param" value="${idValue}" class="link-button">
+    //       ${value}
+    //     </button>
+    //   </form>
+    // </li>`;
     // text += <li>{value}</li>
-  } 
+  }
 
   return (
     // <div style="height: 2000px">

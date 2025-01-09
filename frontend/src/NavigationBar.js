@@ -26,11 +26,6 @@ function NavigationBar() {
                     rel="noopener noreferrer"
                 >My Courses</a>
                 <a
-                    className="Data-test-link"
-                    href="/data-test"
-                    rel="noopener noreferrer"
-                >Data Testing</a>
-                <a
                     className="Course-info-link"
                     href="/course-info"
                     rel="noopener noreferrer"
