@@ -1,5 +1,5 @@
-import '../styling/Browse.css';
 import React, { useState, useEffect } from 'react';
+import '../styling/Browse.css';
 
 function Browse() {
   const [data, setdata] = useState({
@@ -35,7 +35,7 @@ function Browse() {
         })
       })
     )
-  }, [potato])
+  }, [])
 
   // Set initial state for selected options in each dropdown
   const [selectedOption1, setSelectedOption1] = useState('');
@@ -91,7 +91,7 @@ function Browse() {
   };
 
   useEffect(() => {
-    if (!searchParameters.input) {
+    if (searchParameters.input === "") {
       return;
     }  // Don't fetch if input is empty
 
@@ -120,7 +120,16 @@ function Browse() {
       console.error('Error:', error);
     });
     showResults();
-  }, [searchParameters.input, data.names, data.ids, showResults]);
+  }, [searchParameters]);
+
+
+  const handleNameClick = (value) => {
+    // Find the corresponding ID for the selected name
+    const idValue = data.ids.split(",").find((id, index) => data.names.split(",")[index] === value);
+    if (idValue) {
+      setNextPage({ input: idValue });  // Only set nextPage when a name is clicked
+    }
+  };
 
   let text = "<ul>";
   const nameList = (data.names || "").split(",");
@@ -139,41 +148,56 @@ function Browse() {
 
   function myFunction(value) {
     // text += "<li><form method='post' action='/course-info'><input type='hidden' name='extra_submit_param' value='value'><button type='submit' name='submit_param' value={value} class='link-button'>" + {value} + "</button></input></form></li>";
-    var idValue = -1;
-    for (var i = 0; i < nameList.length; i++) {
-      if (nameList[i] === value) {
-        idValue = idList[i];
-        setNextPage({
-          input: idValue
-        });
-      }
-    }
+    // var idValue = -1;
+    // for (var i = 0; i < nameList.length; i++) {
+    //   if (nameList[i] === value) {
+    //     idValue = idList[i];
+    //     break;
+    //   }
+    // }
 
-    // useEffect(() => {
-      if (!nextPage.input) {
-        return;
-      }  // Don't fetch if input is empty
+    // if (idValue !== -1) {
+    //   setNextPage({
+    //     input: idValue
+    //   });
+    // }
 
-      fetch('/getCourseInfo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'data=' + encodeURIComponent(JSON.stringify(nextPage.input))
-      })
-    // }, [nextPage.input]);
+    
 
-    // text += `
-    // <li>
-    //   <form method="post" action="/course-info">
-    //     <input type="hidden" name="extra_submit_param" value="${idValue}">
-    //     <button type="submit" name="submit_param" value="${idValue}" class="link-button">
-    //       ${value}
-    //     </button>
-    //   </form>
-    // </li>`;
-    // text += <li>{value}</li>
+    text += `
+    <li>
+      <form method="post" action="/course-info">
+        <input type="hidden" name="extra_submit_param">
+        <button type="submit" name="submit_param"" class="link-button" onClick={() => handleNameClick(name)}>
+          ${value}
+        </button>
+      </form>
+    </li>`;
+    text += <li>{value}</li>
   }
+
+  useEffect(() => {
+    if (nextPage.input === "") {
+      return;
+    }  // Don't fetch if input is empty
+
+    fetch('/getCourseInfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'data=' + encodeURIComponent(JSON.stringify(nextPage.input))
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Handle the fetched data here
+      console.log(data);
+      // You could set state or handle it as required
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }, [nextPage.input]); // This ensures the effect runs only when nextPage.input changes
 
   return (
     // <div style="height: 2000px">
