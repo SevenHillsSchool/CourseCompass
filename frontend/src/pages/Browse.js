@@ -120,7 +120,7 @@ function Browse() {
       console.error('Error:', error);
     });
     showResults();
-  }, [searchParameters]);
+  }, [searchParameters, data]);
 
 
   const handleNameClick = (value) => {
@@ -166,14 +166,15 @@ function Browse() {
 
     text += `
     <li>
-      <form method="post" action="/course-info">
-        <input type="hidden" name="extra_submit_param">
-        <button type="submit" name="submit_param"" class="link-button" onClick={() => handleNameClick(name)}>
-          ${value}
-        </button>
-      </form>
+      <button
+        name="submit_param" 
+        class="link-button" 
+        onClick={() =&gt handleNameClick(${value})}
+        >
+        ${value}
+      </button>
     </li>`;
-    text += <li>{value}</li>
+    // text += <li>{value}</li>
   }
 
   useEffect(() => {
@@ -197,6 +198,9 @@ function Browse() {
     .catch(error => {
       console.error('Error:', error);
     });
+    if (nextPage.input !== "") {
+      window.open("/course-info", "_self");
+    }
   }, [nextPage.input]); // This ensures the effect runs only when nextPage.input changes
 
   return (
